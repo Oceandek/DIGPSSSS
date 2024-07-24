@@ -1,3 +1,4 @@
+-- ok
 getgenv().Config = {
     AutoDigsite = {
         Enabled = true,
@@ -118,9 +119,11 @@ if Config.Performance.SimpleFpsBooster then
     }
     
     for _, v in pairs(game:GetService("Players").LocalPlayer.PlayerScripts.Scripts:GetDescendants()) do
-        if v:IsA("Script") and not table.match(blacklist, v.Name) and ((not v.Parent) or v.Parent.Name ~= "Breakables") and ((not v.Parent) or v.Parent.Name ~= "Random Events") and ((not v.Parent) or v.Parent.Name ~= "GUI") then
-            v:Destroy()
-        end
+        pcall(function()
+            if v:IsA("Script") and not table.match(blacklist, v.Name) and ((not v.Parent) or v.Parent.Name ~= "Breakables") and ((not v.Parent) or v.Parent.Name ~= "Random Events") and ((not v.Parent) or v.Parent.Name ~= "GUI") then
+                v:Destroy()
+            end
+        end)
     end
 
     local paths = {
